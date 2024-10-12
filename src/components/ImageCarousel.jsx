@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // Ensure this CSS file is properly loaded
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import Navbar from './Navbar';
+import Typewriter from 'typewriter-effect';
 
 const ImageCarousel = () => {
   const images = [
@@ -11,9 +12,18 @@ const ImageCarousel = () => {
     "/static/wed_hall.svg"
   ];
 
+  const sentences = ["Book Rooms & Halls At Ease", "Plan Your Events Effortlessly", "Celebrate with Us in Style"];
+
+  const sentencess = [
+    { first: "Plan Your Events", second: "Effortlessly" },
+    { first: "Celebrate with Us", second: "in Style" },
+    { first: "Book Rooms & Halls", second: "At Ease" }
+  ];
+
+
   return (
     <div className="relative">
-      <Navbar /> {/* Navbar on top of carousel */}
+      <Navbar />
       <Carousel
         autoPlay
         infiniteLoop
@@ -22,28 +32,24 @@ const ImageCarousel = () => {
         showArrows={true}
         interval={3000}
         transitionTime={800}
-
-        // Custom left arrow button
         renderArrowPrev={(onClickHandler, hasPrev, label) =>
           hasPrev && (
-            <button 
-              type="button" 
-              onClick={onClickHandler} 
+            <button
+              type="button"
+              onClick={onClickHandler}
               className="absolute left-0 z-10 p-2 text-black rounded-full hover:bg-gray-200"
               style={{ top: '50%', transform: 'translateY(-50%)' }}
               aria-label={label}
             >
-              <SlArrowLeft size={25}/>
+              <SlArrowLeft size={25} />
             </button>
           )
         }
-
-        // Custom right arrow button
         renderArrowNext={(onClickHandler, hasNext, label) =>
           hasNext && (
-            <button 
-              type="button" 
-              onClick={onClickHandler} 
+            <button
+              type="button"
+              onClick={onClickHandler}
               className="absolute right-0 z-10 p-2 text-black rounded-full hover:bg-gray-200"
               style={{ top: '50%', transform: 'translateY(-50%)' }}
               aria-label={label}
@@ -59,6 +65,13 @@ const ImageCarousel = () => {
           </div>
         ))}
       </Carousel>
+
+      {/* Overlapping Text with Typewriter Effect */}
+      <div className='absolute z-20 top-28 left-1/4  transform -translate-x-1/2 -translate-y-1/2 text-white m-12 w-[35%] h-[25%] text-6xl font-bold overflow-hidden typewriter-holder'>
+        <p className='text-wrap '>
+          <Typewriter options={{ strings: sentences, autoStart: true, loop: true, deleteSpeed: 70, delay: 80, }} />
+        </p>
+      </div>
 
       {/* Overlapping Button */}
       <div className='flex justify-center rounded-m'>

@@ -4,6 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { motion } from 'framer-motion'; // For animations
 import dayjs from 'dayjs';
+import Counter from './Counter';
 
 const RoomBookingForm = () => {
   const [arrivalDate, setArrivalDate] = useState(dayjs());
@@ -49,17 +50,17 @@ const RoomBookingForm = () => {
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto -mt-12 relative z-20">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className="border border-x-0 border-y-0 border-b-2 border-black m-8">
-            <div className="flex justify-around">
-              <label className="mr-4 text-base font-medium flex">Arrival</label>
-              <label className="mr-4 text-base font-medium flex">Departure</label>
+            <div className="grid grid-cols-2  ">
+              <label className="mx-5 text-base font-medium flex">Arrival</label>
+              <label className="mx-10 text-base font-medium flex">Departure</label>
             </div>
 
-            <div className="flex px-5 items-center justify-around mb-4">
+            <div className="grid grid-cols-2 gap-20 px-5 items-center justify-around mb-4">
               {/* Arrival Date Picker */}
               <div ref={arrivalRef}>
                 <input
                   type="text"
-                  className="mt-1 p-2 border rounded-md w-40 text-center"
+                  className="mt-1 p-2 border bg-[#F4F4F4] border-black rounded-md w-40 text-center"
                   value={arrivalDate.format('MM/DD/YYYY')}
                   onClick={() => {
                     setShowArrivalPicker(true);
@@ -90,7 +91,7 @@ const RoomBookingForm = () => {
               <div ref={departureRef}>
                 <input
                   type="text"
-                  className="mt-1 p-2 border rounded-md w-40 text-center"
+                  className="mt-1 p-2 border bg-[#F4F4F4] border-black rounded-md w-40 text-center"
                   value={departureDate.format('MM/DD/YYYY')}
                   onClick={() => {
                     setShowDeparturePicker(true);
@@ -121,21 +122,9 @@ const RoomBookingForm = () => {
 
           <div className="border border-x-0 border-y-0 border-b-2 border-black m-8">
             <div className="grid grid-cols-2 gap-4 mb-4">
+              <Counter label={"Adult"}/>
               <div className="flex items-center justify-center">
-                <label className="mr-4 text-sm font-medium">Adults</label>
-                <input
-                  type="number"
-                  defaultValue="2"
-                  className="mt-1 p-2 border rounded-md w-20 text-center"
-                />
-              </div>
-              <div className="flex items-center justify-center">
-                <label className="mr-4 text-sm font-medium">Children</label>
-                <input
-                  type="number"
-                  defaultValue="0"
-                  className="mt-1 p-2 border rounded-md w-20 text-center"
-                />
+              <Counter label={"Children"}/>
               </div>
             </div>
           </div>
