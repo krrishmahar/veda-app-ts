@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CgProfile } from 'react-icons/cg';
 import { IoPersonCircle } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [active, setActive] = useState('home'); // Track which page is active
@@ -10,36 +10,36 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-end items-center px-6">
         <ul className="flex space-x-6 text-white  items-center">
           <li>
-            <a 
-              href="#home" 
+            <Link 
+              to="/home" 
               className={`hover:text-gray-300 ${active === 'home' ? 'active' : ''}`} 
               onClick={() => setActive('home')}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a 
-              href="#rooms" 
+            <Link 
+              to="/roompage" //change into better name 
               className={`hover:text-gray-300 ${active === 'rooms' ? 'active' : ''}`} 
               onClick={() => setActive('rooms')}
             >
               Room & Halls
-            </a>
+            </Link>
           </li>
           <li>
-            <a 
-              href="#contact" 
+            <Link 
+              to="/contact" 
               className={`hover:text-gray-300 ${active === 'contact' ? 'active' : ''}`} 
               onClick={() => setActive('contact')}
             >
               Contact Us
-            </a>
+            </Link>
           </li>
           <li>
             <div className='flex bg-black border-white px-3 py-[6px] font-bold rounded'>
-              <a className="flex  justify-center items-center" href=""><samp> Sign In&nbsp;</samp><IoPersonCircle size={24}/>  
-              </a>
+              <Link className="flex  justify-center items-center" to="/signin"><samp> Sign In&nbsp;</samp><IoPersonCircle size={24}/>  
+              </Link>
             </div>
           </li>
         </ul>

@@ -5,6 +5,7 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { motion } from 'framer-motion'; // For animations
 import dayjs from 'dayjs';
 import Counter from './Counter';
+import { Link } from 'react-router-dom';
 
 const RoomBookingForm = () => {
   const [arrivalDate, setArrivalDate] = useState(dayjs());
@@ -130,7 +131,9 @@ const RoomBookingForm = () => {
           </div>
 
           <div className="flex justify-center">
-            <button className="px-52 py-3 bg-black text-white rounded-lg">Next</button>
+            <Link to="/roompage" > 
+            <button className="px-52 py-3 bg-black text-white rounded-lg " >Next</button>
+            </Link>
           </div>
         </LocalizationProvider>
       </div>
