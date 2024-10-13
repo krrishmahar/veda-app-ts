@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
-import { BiSolidDrink } from 'react-icons/bi';
-import { CiBookmark } from 'react-icons/ci';
-import { BsBookmarkFill } from 'react-icons/bs'; // Import filled bookmark icon
+import React, { useState, useEffect } from 'react';
 import { FaBath, FaTv, FaWifi } from 'react-icons/fa';
+import { BiSolidDrink } from 'react-icons/bi';
 import { GiKnifeFork } from 'react-icons/gi';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import axios from 'axios';
+import { CiBookmark } from 'react-icons/ci';
+import { Link } from 'react-router-dom';
 
-const RoomBooking = () => {
-    const rooms = [
-        { id: 1, title: "Ambassador Suite", price: "15,000 Rs.", iconSrc: "/static/rooms/room-01.svg" },
-        { id: 2, title: "Junior Suite", price: "15,000 Rs.", iconSrc: "/static/rooms/room-02.svg" },
-        { id: 3, title: "Deluxe Room", price: "100,000 Rs.", iconSrc: "/static/rooms/room-03.svg" },
-        { id: 4, title: "Presidential Suite", price: "25,000 Rs.", iconSrc: "/static/rooms/room-04.svg" },
-        { id: 5, title: "Family Room", price: "20,000 Rs.", iconSrc: "/static/rooms/room-05.svg" },
-        { id: 6, title: "Single Room", price: "5,000 Rs.", iconSrc: "/static/rooms/room-01.svg" },
-    ];
-
-    // State for managing current page and bookmarked rooms
+const RoomBooking = ({ endpoint }) => {
+    const [rooms, setRooms] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [bookmarkedRooms, setBookmarkedRooms] = useState(new Set()); // Use Set to manage bookmarks
+    const [bookmarkedRooms, setBookmarkedRooms] = useState(new Set());
 
-    const itemsPerPage = 4; // Number of items per page
+    // Fetch rooms data from API
+    useEffect(() => {
+        const fetchRooms = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080${endpoint}`);
+                setRooms(response.data);  // Assumes backend sends an array of rooms
+            } catch (error) {
+                console.error("Error fetching rooms data:", error);
+            }
+        };
+        fetchRooms();
+    }, []);
+
+    const itemsPerPage = 4;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentRooms = rooms.slice(indexOfFirstItem, indexOfLastItem); // Current rooms based on page
+    const currentRooms = Array.isArray(rooms) ? rooms.slice(indexOfFirstItem, indexOfLastItem) : [];
 
-    // Calculate total pages
     const totalPages = Math.ceil(rooms.length / itemsPerPage);
 
     const toggleBookmark = (roomId) => {
         const updatedBookmarks = new Set(bookmarkedRooms);
         if (updatedBookmarks.has(roomId)) {
-            updatedBookmarks.delete(roomId); // Remove from bookmarks
+            updatedBookmarks.delete(roomId);
         } else {
-            updatedBookmarks.add(roomId); // Add to bookmarks
+            updatedBookmarks.add(roomId);
         }
-        setBookmarkedRooms(updatedBookmarks); // Update state
+        setBookmarkedRooms(updatedBookmarks);
     };
 
     return (
@@ -49,34 +53,32 @@ const RoomBooking = () => {
                     <IoIosArrowBack size={20} />
                 </button>
                 <div className="grid grid-cols-4 gap-4">
-                    {currentRooms.map((room) => ( // Map through currentRooms
+                    {Array.isArray(currentRooms) && currentRooms.map((room) => (
                         <div key={room.id} className="bg-white shadow-lg rounded-lg overflow-hidden relative mx-8 w-60">
-                            <img src={room.iconSrc} alt={room.title} className="w-full h-48 object-cover " />
-
-                            {/* Bookmark Button */}
+                            <img src={room.imageUrl || "/static/rooms/room-01.svg"} alt={room.hallName} className="w-full h-48 object-cover " onError={e => e.target.src = "/static/rooms/room-01.svg"} />
                             <button
-                                onClick={() => toggleBookmark(room.id)} // Toggle bookmark on click
+                                onClick={() => toggleBookmark(room.id)}
                                 className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md z-10"
                             >
                                 {bookmarkedRooms.has(room.id) ? <BsBookmarkFill size={20} /> : <CiBookmark size={20} />}
                             </button>
 
-                            <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{room.title}</h3>
+                            <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{room.hallName}</h3>
 
                             <div className="absolute right-0 p-2 bg-white bg-opacity-70 z-10 bottom-32">
                                 <p className="text-sm ">From <samp className='font-semibold'>
-                                    {` ${room.price}`}
+                                    {`${room.price} Rs.`}
                                 </samp>
                                 </p>
                             </div>
 
                             <div className="p-4">
                                 <div className="icons flex justify-between my-2">
-                                    <FaWifi size={16} />
+                                    {room.wifi && <FaWifi size={16} />}
                                     <FaBath size={16} />
                                     <FaTv size={16} />
+                                    {room.food && <GiKnifeFork size={16} />}
                                     <BiSolidDrink size={16} />
-                                    <GiKnifeFork size={16} />
                                 </div>
                                 <button className="bg-white text-black py-2 px-4 border font-extrabold rounded-md mt-4 w-full" style={{ border: "solid 2px black" }}>SHOW MORE...</button>
                             </div>
@@ -84,7 +86,7 @@ const RoomBooking = () => {
                     ))}
                 </div>
 
-                {/* Pagination Dots */}
+
                 <div className="flex justify-center my-4">
                     <button
                         onClick={() => setCurrentPage(currentPage + 1)}
@@ -95,6 +97,13 @@ const RoomBooking = () => {
                     </button>
                 </div>
             </div>
+
+            <div className="flex justify-end px-6">
+                <Link to="/roompage" >
+                    <button className="m-2 border border-black rounded-full px-6 py-2 font-semibold " >View more...</button>
+                </Link>
+            </div>
+
             <div className="flex justify-center items-center p-5">
                 {Array.from({ length: totalPages }, (_, index) => (
                     <button

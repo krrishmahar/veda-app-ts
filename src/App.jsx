@@ -1,8 +1,8 @@
 import ImageCarousel from './components/ImageCarousel'
 import RoomBookingForm from './components/RoomBookingForm'
-import RoomBooking from './components/RoomBooking'
-import Banner from './components/Banner'
-import Footer from './components/Footer'
+import RoomBooking from './components/Booking'
+import Banner from './components/global/Banner'
+import Footer from './components/global/Footer'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           {/* Carousel Section */}
           <div className="relative">
             <Banner />
-            <ImageCarousel />
+            <ImageCarousel /> 
           </div>
         </header>
         <div>
@@ -21,11 +21,11 @@ function App() {
         </div>
         <div>
           <p className='underlined text-2xl border border-s-2 m-7 px-5 border-black border-r-0 border-y-0'><samp className='text-2xl font-extrabold underline'>New</samp> Hotel Rooms</p>
-          <div className='relative z-20 mt-14'><RoomBooking /></div>
+          <div className='relative z-20 mt-14'><RoomBooking endpoint={"/api/rooms"} /></div>
         </div>
         <div>
           <p className='underlined text-2xl border border-s-2 mx-7 px-5 my-3 border-black border-r-0 border-y-0'><samp className='text-2xl font-extrabold underline'>New</samp> Banquet Halls</p>
-          <div className='relative z-20 mt-14'><RoomBooking /></div>
+          <div className='relative z-20 mt-14'><RoomBooking endpoint={"/api/halls"}/></div>
         </div>
         <Footer/>
       </div>
