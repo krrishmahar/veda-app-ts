@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
@@ -14,12 +14,6 @@ const ImageCarousel = () => {
 
   const sentences = ["Book Rooms & Halls At Ease", "Plan Your Events Effortlessly", "Celebrate with Us in Style"];
 
-  const sentencess = [
-    { first: "Plan Your Events", second: "Effortlessly" },
-    { first: "Celebrate with Us", second: "in Style" },
-    { first: "Book Rooms & Halls", second: "At Ease" }
-  ];
-
 
   return (
     <div className="relative">
@@ -30,7 +24,7 @@ const ImageCarousel = () => {
         showThumbs={false}
         showStatus={false}
         showArrows={true}
-        interval={3000}
+        interval={300}
         transitionTime={800}
         renderArrowPrev={(onClickHandler, hasPrev, label) =>
           hasPrev && (
@@ -60,7 +54,7 @@ const ImageCarousel = () => {
         }
       >
         {images.map((image, idx) => (
-          <div key={idx} className='m-6 px-6'>
+          <div key={idx} className='mx-6 my-2 px-6'>
             <img src={image} alt={`Slide ${idx}`} className="w-full h-auto object-cover" />
           </div>
         ))}

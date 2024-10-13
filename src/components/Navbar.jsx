@@ -10,27 +10,27 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-end items-center px-6">
         <ul className="flex space-x-6 text-white  items-center">
           <li>
-            <Link 
-              to="/home" 
-              className={`hover:text-gray-300 ${active === 'home' ? 'active' : ''}`} 
+            <Link
+              to="/"
+              className={`hover:text-gray-300 ${active === 'home' ? 'active' : ''}`}
               onClick={() => setActive('home')}
             >
               Home
             </Link>
           </li>
           <li>
-            <Link 
+            <Link
               to="/roompage" //change into better name 
-              className={`hover:text-gray-300 ${active === 'rooms' ? 'active' : ''}`} 
+              className={`hover:text-gray-300 ${active === 'rooms' ? 'active' : ''}`}
               onClick={() => setActive('rooms')}
             >
               Room & Halls
             </Link>
           </li>
           <li>
-            <Link 
-              to="/contact" 
-              className={`hover:text-gray-300 ${active === 'contact' ? 'active' : ''}`} 
+            <Link
+              to="/contact"
+              className={`hover:text-gray-300 ${active === 'contact' ? 'active' : ''}`}
               onClick={() => setActive('contact')}
             >
               Contact Us
@@ -38,7 +38,7 @@ const Navbar = () => {
           </li>
           <li>
             <div className='flex bg-black border-white px-3 py-[6px] font-bold rounded'>
-              <Link className="flex  justify-center items-center" to="/signin"><samp> Sign In&nbsp;</samp><IoPersonCircle size={24}/>  
+              <Link className="flex  justify-center items-center" to="/signin"><samp> Sign In&nbsp;</samp><IoPersonCircle size={24} />
               </Link>
             </div>
           </li>
