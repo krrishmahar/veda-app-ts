@@ -49,13 +49,13 @@ const Booking = ({ endpoint }) => {
                 <button
                     onClick={() => setCurrentPage(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 bg-white rounded-sm mr-2 hover:bg-gray-200"
+                    className="px-4 py-2 bg-transparent rounded-sm mr-2 hover:bg-gray-200"
                 >
                     <IoIosArrowBack size={20} />
                 </button>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-11">
                     {Array.isArray(currentRooms) && currentRooms.map((room) => (
-                        <div key={room.id} className="bg-white shadow-lg rounded-lg overflow-hidden relative mx-8 w-60">
+                        <div key={room.id} className="bg-white shadow-2xl rounded-lg overflow-hidden relative mx-8 w-60">
                             <img src={room.imageUrl || "/static/rooms/room-01.svg"} alt={room.Name} className="w-full h-48 object-cover " onError={e => e.target.src = "/static/rooms/room-01.svg"} />
                             <button
                                 onClick={() => toggleBookmark(room.id)}
@@ -94,7 +94,7 @@ const Booking = ({ endpoint }) => {
                     <button
                         onClick={() => setCurrentPage(currentPage + 1)}
                         disabled={indexOfLastItem >= rooms.length}
-                        className="px-4 py-2 bg-white rounded-sm ml-2 hover:bg-gray-200"
+                        className="px-4 py-2 bg-transparent rounded-sm ml-2 hover:bg-gray-200"
                     >
                         <IoIosArrowForward size={20} />
                     </button>
@@ -103,7 +103,7 @@ const Booking = ({ endpoint }) => {
 
             <div className="flex justify-end px-6">
                 <Link to="/roompage" >
-                    <button className="m-2 border border-black rounded-full px-6 py-2 font-semibold " >View more...</button>
+                    <button className="m-4 border border-black rounded-full px-6 py-[0.35rem] font-semibold " >View more...</button>
                 </Link>
             </div>
 

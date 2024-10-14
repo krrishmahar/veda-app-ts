@@ -7,14 +7,14 @@ import '../../App.css'
 const CheckDate = () => {
     return (
         <>
-            <div className='checkDates m-3 '>
+            <div className='checkDates mx-11 '>
                 <div className="date mb-3 flex font-[700] text-2xl justify-center items-center text-[#727272]">
                     October 12 2024
                 </div>
-                <div className=" flex flex-col border-[20px] p-8 rounded-xl border-[#EBEBEB] ">
+                <div className=" flex flex-col border-[20px] p-6 rounded-xl border-[#EBEBEB] ">
                     <div className='grid grid-cols-4 gap-0'>
                         <div className='grid grid-cols-2'>
-                            <div className='text-2xl pl-16'>
+                            <div className='text-2xl pl-[3.5rem]'>
                                 <div className='gray-bold'>Today's</div>
                                 <div className='font-extrabold '>Check-in</div>
                             </div>
@@ -35,7 +35,7 @@ const CheckDate = () => {
                             <div className='text-6xl pt-1 pl-20 font-extrabold text-[#22CB00]'>2</div>
                         </div>
                         <div className='grid grid-cols-2'>
-                            <div className='text-2xl pl-5'>
+                            <div className='text-2xl pl-2'>
                                 <div className='gray-bold'>Total</div>
                                 <div className='font-extrabold '>No. of Guest</div>
                             </div>

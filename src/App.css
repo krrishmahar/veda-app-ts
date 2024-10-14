@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
-.room-booking .bg-white {
-    position: relative; /* Ensure the container allows for absolute positioning */
-}
-
 body{
     font-family: 'Lexend' ,'Courier New', Courier, monospace;
 }
