@@ -6,8 +6,9 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import axios from 'axios';
 import { CiBookmark } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
+import { BsBookmarkFill } from 'react-icons/bs';
 
-const RoomBooking = ({ endpoint }) => {
+const Booking = ({ endpoint }) => {
     const [rooms, setRooms] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [bookmarkedRooms, setBookmarkedRooms] = useState(new Set());
@@ -55,7 +56,7 @@ const RoomBooking = ({ endpoint }) => {
                 <div className="grid grid-cols-4 gap-4">
                     {Array.isArray(currentRooms) && currentRooms.map((room) => (
                         <div key={room.id} className="bg-white shadow-lg rounded-lg overflow-hidden relative mx-8 w-60">
-                            <img src={room.imageUrl || "/static/rooms/room-01.svg"} alt={room.hallName} className="w-full h-48 object-cover " onError={e => e.target.src = "/static/rooms/room-01.svg"} />
+                            <img src={room.imageUrl || "/static/rooms/room-01.svg"} alt={room.Name} className="w-full h-48 object-cover " onError={e => e.target.src = "/static/rooms/room-01.svg"} />
                             <button
                                 onClick={() => toggleBookmark(room.id)}
                                 className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md z-10"
@@ -63,7 +64,7 @@ const RoomBooking = ({ endpoint }) => {
                                 {bookmarkedRooms.has(room.id) ? <BsBookmarkFill size={20} /> : <CiBookmark size={20} />}
                             </button>
 
-                            <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{room.hallName}</h3>
+                            <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{room.name}</h3>
 
                             <div className="absolute right-0 p-2 bg-white bg-opacity-70 z-10 bottom-32">
                                 <p className="text-sm ">From <samp className='font-semibold'>
@@ -82,6 +83,8 @@ const RoomBooking = ({ endpoint }) => {
                                 </div>
                                 <button className="bg-white text-black py-2 px-4 border font-extrabold rounded-md mt-4 w-full" style={{ border: "solid 2px black" }}>SHOW MORE...</button>
                             </div>
+
+                            
                         </div>
                     ))}
                 </div>
@@ -117,4 +120,4 @@ const RoomBooking = ({ endpoint }) => {
     );
 };
 
-export default RoomBooking;
+export default Booking;

@@ -24,7 +24,7 @@ const ImageCarousel = () => {
         showThumbs={false}
         showStatus={false}
         showArrows={true}
-        interval={300}
+        interval={3000}
         transitionTime={800}
         renderArrowPrev={(onClickHandler, hasPrev, label) =>
           hasPrev && (

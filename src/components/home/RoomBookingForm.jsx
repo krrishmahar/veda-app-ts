@@ -4,7 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { motion } from 'framer-motion'; // For animations
 import dayjs from 'dayjs';
-import Counter from './Counter';
+import Counter  from './Counter';
 import { Link } from 'react-router-dom';
 
 const RoomBookingForm = () => {
