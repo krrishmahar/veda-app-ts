@@ -4,12 +4,12 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { FaBath, FaPhoneAlt, FaTv, FaWifi } from 'react-icons/fa';
 
-import CheckDate from './components/Admin/CheckDate';
+import CheckDate from './components/admin/CheckDate';
 import { LuMail } from 'react-icons/lu';
 import Footer from './components/global/Footer';
 
 import './App.css'
-import SwitchButton from './components/Admin/SwitchButton';
+import SwitchButton from './components/admin/SwitchButton';
 import { MdVerified } from 'react-icons/md';
 
 const AdminPage = () => {
@@ -191,7 +191,7 @@ const AdminPage = () => {
                                 <div className="guest-details w-60 text-left">
                                     <div className="flex">
                                         <div className='w-11 h-11 bg-[#676767] rounded-xl mr-4 '> {guest.uuid &&
-                                            <img src="./static/verified.svg" alt="verified.svg" className='relative left-[26px] top-[26px]'/>
+                                            <img src="/static/verified.svg" alt="" className='relative left-[26px] top-[26px]'/>
                                             }
                                         </div>
                                         <div>

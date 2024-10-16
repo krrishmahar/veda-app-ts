@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FaBath, FaTv, FaWifi } from 'react-icons/fa';
-import { BiSolidDrink } from 'react-icons/bi';
+import { TbAirConditioning } from "react-icons/tb";
 import { GiKnifeFork } from 'react-icons/gi';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import axios from 'axios';
 import { CiBookmark } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
-import { BsBookmarkFill } from 'react-icons/bs';
+import { BsBookmarkFill, BsDoorOpenFill } from 'react-icons/bs';
+import { RiHotelBedLine } from "react-icons/ri";
+import { IoPeople } from 'react-icons/io5';
 
 const Booking = ({ endpoint }) => {
     const [rooms, setRooms] = useState([]);
@@ -66,7 +68,7 @@ const Booking = ({ endpoint }) => {
 
                             <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{room.name}</h3>
 
-                            <div className="absolute right-0 p-2 bg-white bg-opacity-70 z-10 bottom-32">
+                            <div className="absolute right-0 p-2 bg-white bg-opacity-70 z-10 bottom-40">
                                 <p className="text-sm ">From <samp className='font-semibold'>
                                     {`${room.price} Rs.`}
                                 </samp>
@@ -74,17 +76,29 @@ const Booking = ({ endpoint }) => {
                             </div>
 
                             <div className="p-4">
-                                <div className="icons flex justify-between my-2">
+                                <div className='flex justify-between'>
+                                    {room.availability ? //set this via endpoint
+                                        <div className='flex items-center'><BsDoorOpenFill color='green' /><samp className='extra-lexa text-green-600'> Vacant</samp>
+                                        </div>
+                                        :
+                                        <div className='flex items-center'><BsDoorOpenFill color='red' /><samp  className=' extra-lexa text-red-600'> Occupied</samp></div>
+                                    }
+                                    <div className='flex items-center '>
+                                        <IoPeople /> : <samp className='text-[#A7A7A7] font-bold px-1'> {room.roomCapacity}</samp>
+                                        <RiHotelBedLine /> : <samp className='text-[#A7A7A7] px-1'> {room.beds}</samp>
+                                    </div>
+                                </div>
+                                <div className="icons flex justify-between my-1">
                                     {room.wifi && <FaWifi size={16} />}
                                     <FaBath size={16} />
                                     <FaTv size={16} />
                                     {room.food && <GiKnifeFork size={16} />}
-                                    <BiSolidDrink size={16} />
+                                    <TbAirConditioning  size={16} />
                                 </div>
-                                <button className="bg-white text-black py-2 px-4 border font-extrabold rounded-md mt-4 w-full" style={{ border: "solid 2px black" }}>SHOW MORE...</button>
+                                <button className="bg-white text-black py-2 px-4 border font-extrabold rounded-md mt-2 w-full" style={{ border: "solid 2px black" }}>SHOW MORE...</button>
                             </div>
 
-                            
+
                         </div>
                     ))}
                 </div>
