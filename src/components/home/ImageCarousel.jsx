@@ -17,7 +17,6 @@ const ImageCarousel = () => {
 
   return (
     <div className="relative">
-      <Navbar />
       <Carousel
         autoPlay
         infiniteLoop
@@ -54,7 +53,7 @@ const ImageCarousel = () => {
         }
       >
         {images.map((image, idx) => (
-          <div key={idx} className='mx-6 my-2 px-6'>
+          <div key={idx} className='mx-6  px-6'>
             <img src={image} alt={`Slide ${idx}`} className="w-full h-auto object-cover" />
           </div>
         ))}
@@ -69,7 +68,7 @@ const ImageCarousel = () => {
 
       {/* Overlapping Button */}
       <div className='flex justify-center rounded-m'>
-        <div className='box shadow-md flex absolute bottom-0 justify-center items-center bg-slate-100 z-10 w-[80%] h-[5%] border border-solid p-10 rounded-md'>
+        <div className='box shadow-md flex absolute bottom-[-28px] justify-center items-center bg-slate-100 z-10 w-[80%] h-[5%] border border-solid p-10 rounded-md'>
           <div className="z-20 absolute justify-center items-center bg-black text-white py-2 px-4 rounded-md">
             <a href="https://website-link.com" target="_blank" rel="noopener noreferrer" className='text-base px-40'>
               VISIT THE BOMBAY ANDHRA MAHASABHA & GYMKHANA WEBSITE

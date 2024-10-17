@@ -8,7 +8,9 @@ const Layout = ({ children }) => {
     <>
       <header>
         <Banner />
+        <div className="relative flex justify-end items-center px-6 ">
         <Navbar />  {/* Adjust text color as needed */}
+        </div>
       </header>
       <main>
         {children}  {/* This is where the page-specific content goes */}

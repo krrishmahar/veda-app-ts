@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaBath, FaTv, FaWifi } from 'react-icons/fa';
-import { TbAirConditioning } from "react-icons/tb";
+import { TbAirConditioning, TbBookmarkFilled } from "react-icons/tb";
 import { GiKnifeFork } from 'react-icons/gi';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import axios from 'axios';
@@ -61,21 +61,21 @@ const Booking = ({ endpoint }) => {
                             <img src={room.imageUrl || "/static/rooms/room-01.svg"} alt={room.Name} className="w-full h-48 object-cover " onError={e => e.target.src = "/static/rooms/room-01.svg"} />
                             <button
                                 onClick={() => toggleBookmark(room.id)}
-                                className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md z-10"
+                                className="absolute top-2 right-2 bg-white rounded-full p-[.35rem] shadow-md z-10"
                             >
-                                {bookmarkedRooms.has(room.id) ? <BsBookmarkFill size={20} /> : <CiBookmark size={20} />}
+                                {bookmarkedRooms.has(room.id) ? <TbBookmarkFilled size={16} /> : <CiBookmark size={16} />}
                             </button>
 
                             <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{room.name}</h3>
 
-                            <div className="absolute right-0 p-2 bg-white bg-opacity-70 z-10 bottom-40">
-                                <p className="text-sm ">From <samp className='font-semibold'>
+                            <div className="absolute right-2 rounded-md p-2 bg-white bg-opacity-70 z-10 bottom-[8.5rem]">
+                                <p className="text-sm "><samp className='text-[#787878] font-extrabold'>from </samp> <samp className='extra-lexa'>
                                     {`${room.price} Rs.`}
                                 </samp>
                                 </p>
                             </div>
 
-                            <div className="p-4">
+                            <div className="p-6 pt-2">
                                 <div className='flex justify-between'>
                                     {room.availability ? //set this via endpoint
                                         <div className='flex items-center'><BsDoorOpenFill color='green' /><samp className='extra-lexa text-green-600'> Vacant</samp>

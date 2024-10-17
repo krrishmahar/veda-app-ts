@@ -1,37 +1,38 @@
-import Banner from "./components/global/Banner"
-import Footer from './components/global/Footer'
-import ImageCarousel from "./components/Home/ImageCarousel"
-import RoomBookingForm from "./components/Home/RoomBookingForm"
-import Booking from "./components/home/Booking"
-import './App.css'
+import React from 'react';
+import ImageCarousel from './components/Home/ImageCarousel';
+import RoomBookingForm from './components/Home/RoomBookingForm';
+import Booking from './components/home/Booking';
+import Layout from './Layout';   // Import the Base layout
 
-function App() {
+
+const HomePage = () => {
   return (
-    <>
+    <Layout >
       <div>
-        <header>
-          {/* Carousel Section */}
-          <div className="relative">
-            <Banner />
-            <ImageCarousel /> 
-          </div>
-        </header>
-        <div>
-          <p className='underlined text-2xl border border-s-2 m-7 px-5 border-black border-r-0 border-y-0'><samp className='text-2xl extra-lexa '>Book</samp> A Room Now:</p>
-          <div className='relative z-20 mt-14'><RoomBookingForm /></div>
+        <div className="relative">
+          <ImageCarousel />
         </div>
-        <div>
-          <p className='underlined text-2xl border border-s-2 m-7 px-5 border-black border-r-0 border-y-0'><samp className='text-2xl extra-lexa underline' >New</samp> Hotel Rooms</p>
-          <div className='relative z-20 mt-14'><Booking endpoint={"/api/rooms"} /></div>
+        <p className='underlined text-2xl m-7 px-5 border-black border-l-2'>
+          <samp className='text-2xl extra-lexa '>Book</samp> A Room Now:
+        </p>
+        <div className='relative z-20 mt-14'>
+          <RoomBookingForm />
         </div>
-        <div>
-          <p className='underlined text-2xl border border-s-2 mx-7 px-5 my-3 border-black border-r-0 border-y-0'><samp className='text-2xl extra-lexa underline'>New</samp> Banquet Halls</p>
-          <div className='relative z-20 mt-14'><Booking endpoint={"/api/halls"}/></div>
+        <p className='underlined text-2xl m-7 px-5 border-black border-l-2'>
+          <samp className='text-2xl extra-lexa underline'>New</samp> Hotel Rooms
+        </p>
+        <div className='relative z-20 mt-14'>
+          <Booking endpoint={"/api/rooms"} />
         </div>
-        <Footer />
+        <p className='underlined text-2xl mx-7 px-5 my-3 border-black border-l-2'>
+          <samp className='text-2xl extra-lexa underline'>New</samp> Banquet Halls
+        </p>
+        <div className='relative z-20 mt-14'>
+          <Booking endpoint={"/api/halls"} />
+        </div>
       </div>
-    </>
-  )
-}
+    </Layout>
+  );
+};
 
-export default App
+export default HomePage;

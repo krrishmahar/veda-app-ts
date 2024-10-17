@@ -18,7 +18,7 @@ const Navbar = () => {
   }, [location.pathname]); // Dependency on location changes
 
   return (
-    <nav className="absolute w-full bg-transparent z-30 top-5 px-16 py-4">
+    <nav className="absolute w-full bg-transparent z-30 mt-[3.5rem] px-16 ">
       <div className="container mx-auto flex justify-end items-center px-6">
         <ul className={`flex space-x-6  text-white  items-center`}>
           <li>

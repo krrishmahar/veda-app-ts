@@ -11,6 +11,7 @@ import Footer from './components/global/Footer';
 import './App.css'
 import SwitchButton from './components/admin/SwitchButton';
 import { MdVerified } from 'react-icons/md';
+import Marker from './components/global/Marker';
 
 const AdminPage = () => {
     const [isRoomSelected, setIsRoomSelected] = useState(true); // true for Rooms, false for Halls
@@ -128,7 +129,7 @@ const AdminPage = () => {
             roomType: 'Deluxe'
         }
     ];
-    
+
 
 
     useEffect(() => {
@@ -155,9 +156,7 @@ const AdminPage = () => {
     return (
         <>
             <Banner />
-            <div className='flex justify-center'>
-                <div className='bg-[#CF484A] text-white font-extrabold text-3xl mb-2 py-2 px-8 rounded-full'>Manager Dashboard</div>
-            </div>
+            <Marker marker={"Manager Dashboard"} />
             <div className="flex justify-between items-center ">
                 <div>
                     <p className='text-2xl border border-s-2 m-7 px-5 border-black border-r-0 border-y-0'>
@@ -191,14 +190,14 @@ const AdminPage = () => {
                                 <div className="guest-details w-60 text-left">
                                     <div className="flex">
                                         <div className='w-11 h-11 bg-[#676767] rounded-xl mr-4 '> {guest.uuid &&
-                                            <img src="/static/verified.svg" alt="" className='relative left-[26px] top-[26px]'/>
-                                            }
+                                            <img src="/static/verified.svg" alt="" className='relative left-[26px] top-[26px]' />
+                                        }
                                         </div>
                                         <div>
                                             <div className='font-[800] text-black'>
-                                                {guest.guestName }
+                                                {guest.guestName}
                                             </div>
-                                            <div className="uuid font-[700] text-[#06a600]">{guest.uuid }</div>
+                                            <div className="uuid font-[700] text-[#06a600]">{guest.uuid}</div>
                                         </div>
                                     </div>
                                     <div className='text-sm w-fit  flex items-center'>
