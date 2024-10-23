@@ -11,38 +11,38 @@ import { RiHotelBedLine } from "react-icons/ri";
 import { IoPeople } from 'react-icons/io5';
 
 const Booking = ({ endpoint }) => {
-    const [rooms, setRooms] = useState([]);
+    const [items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [bookmarkedRooms, setBookmarkedRooms] = useState(new Set());
+    const [bookmarkedItems, setBookmarkedItems] = useState(new Set());
 
-    // Fetch rooms data from API
+    // Fetch items (rooms/halls) data from API
     useEffect(() => {
-        const fetchRooms = async () => {
+        const fetchItems = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080${endpoint}`);
-                setRooms(response.data);  // Assumes backend sends an array of rooms
+                setItems(response.data);  // Assumes backend sends an array of rooms/halls
             } catch (error) {
-                console.error("Error fetching rooms data:", error);
+                console.error("Error fetching data:", error);
             }
         };
-        fetchRooms();
-    }, []);
+        fetchItems();
+    }, [endpoint]);
 
     const itemsPerPage = 4;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentRooms = Array.isArray(rooms) ? rooms.slice(indexOfFirstItem, indexOfLastItem) : [];
+    const currentItems = Array.isArray(items) ? items.slice(indexOfFirstItem, indexOfLastItem) : [];
 
-    const totalPages = Math.ceil(rooms.length / itemsPerPage);
+    const totalPages = Math.ceil(items.length / itemsPerPage);
 
-    const toggleBookmark = (roomId) => {
-        const updatedBookmarks = new Set(bookmarkedRooms);
-        if (updatedBookmarks.has(roomId)) {
-            updatedBookmarks.delete(roomId);
+    const toggleBookmark = (itemId) => {
+        const updatedBookmarks = new Set(bookmarkedItems);
+        if (updatedBookmarks.has(itemId)) {
+            updatedBookmarks.delete(itemId);
         } else {
-            updatedBookmarks.add(roomId);
+            updatedBookmarks.add(itemId);
         }
-        setBookmarkedRooms(updatedBookmarks);
+        setBookmarkedItems(updatedBookmarks);
     };
 
     return (
@@ -56,58 +56,64 @@ const Booking = ({ endpoint }) => {
                     <IoIosArrowBack size={20} />
                 </button>
                 <div className="grid grid-cols-4 gap-11">
-                    {Array.isArray(currentRooms) && currentRooms.map((room) => (
-                        <div key={room.id} className="bg-white shadow-2xl rounded-lg overflow-hidden relative mx-8 w-60">
-                            <img src={room.imageUrl || "/static/rooms/room-01.svg"} alt={room.Name} className="w-full h-48 object-cover " onError={e => e.target.src = "/static/rooms/room-01.svg"} />
+                    {Array.isArray(currentItems) && currentItems.map((item) => (
+                        <div key={item.id} className="bg-white shadow-2xl rounded-lg overflow-hidden relative mx-8 w-60">
+                            <img src={item.imageUrl || "/static/rooms/room-01.svg"} alt={item.name} className="w-full h-48 object-cover" onError={e => e.target.src = "/static/rooms/room-01.svg"} />
                             <button
-                                onClick={() => toggleBookmark(room.id)}
+                                onClick={() => toggleBookmark(item.id)}
                                 className="absolute top-2 right-2 bg-white rounded-full p-[.35rem] shadow-md z-10"
                             >
-                                {bookmarkedRooms.has(room.id) ? <TbBookmarkFilled size={16} /> : <CiBookmark size={16} />}
+                                {bookmarkedItems.has(item.id) ? <TbBookmarkFilled size={16} /> : <CiBookmark size={16} />}
                             </button>
 
-                            <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{room.name}</h3>
+                            <h3 className="absolute top-2 left-2 text-xl font-bold text-white z-10 drop-shadow-md">{item.name}</h3>
 
                             <div className="absolute right-2 rounded-md p-2 bg-white bg-opacity-70 z-10 bottom-[8.5rem]">
                                 <p className="text-sm "><samp className='text-[#787878] font-extrabold'>from </samp> <samp className='extra-lexa'>
-                                    {`${room.price} Rs.`}
+                                    {`${item.price} Rs.`}
                                 </samp>
                                 </p>
                             </div>
 
                             <div className="p-6 pt-2">
                                 <div className='flex justify-between'>
-                                    {room.availability ? //set this via endpoint
-                                        <div className='flex items-center'><BsDoorOpenFill color='green' /><samp className='extra-lexa text-green-600'> Vacant</samp>
-                                        </div>
+                                    {item.availability ? 
+                                        <div className='flex items-center'><BsDoorOpenFill color='green' /><samp className='extra-lexa text-green-600'> Available</samp></div>
                                         :
-                                        <div className='flex items-center'><BsDoorOpenFill color='red' /><samp  className=' extra-lexa text-red-600'> Occupied</samp></div>
+                                        <div className='flex items-center'><BsDoorOpenFill color='red' /><samp className='extra-lexa text-red-600'> Unavailable</samp></div>
                                     }
-                                    <div className='flex items-center '>
-                                        <IoPeople /> : <samp className='text-[#A7A7A7] font-bold px-1'> {room.roomCapacity}</samp>
-                                        <RiHotelBedLine /> : <samp className='text-[#A7A7A7] px-1'> {room.beds}</samp>
-                                    </div>
+                                    {endpoint === "/api/rooms" ? (
+                                        <div className='flex items-center'>
+                                            <IoPeople /> : <samp className='text-[#A7A7A7] font-bold px-1'> {item.roomCapacity}</samp>
+                                            <RiHotelBedLine /> : <samp className='text-[#A7A7A7] px-1'> {item.beds}</samp>
+                                        </div>
+                                    ) : (
+                                        <div className='flex items-center'>
+                                            <IoPeople /> : <samp className='text-[#A7A7A7] font-bold px-1'> {item.hallCapacity}</samp>
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="icons flex justify-between my-1">
-                                    {room.wifi && <FaWifi size={16} />}
-                                    <FaBath size={16} />
-                                    <FaTv size={16} />
-                                    {room.food && <GiKnifeFork size={16} />}
-                                    <TbAirConditioning  size={16} />
-                                </div>
+                                {endpoint === "/api/rooms" && <div className="icons flex justify-between my-1">
+                                    {item.wifi && <FaWifi size={16} />}
+                                    {item.bath && <FaBath size={16} />}
+                                    {item.tv && <FaTv size={16} />}
+                                    {item.food && <GiKnifeFork size={16} />}
+                                    {item.ac && <TbAirConditioning size={16} />}
+                                </div>}
+                                {endpoint === "/api/halls" && <div className="icons flex justify-evenly my-1">
+                                    {item.food && <GiKnifeFork size={16} />}
+                                    {item.ac && <TbAirConditioning size={16} />}
+                                </div>}
                                 <button className="bg-white text-black py-2 px-4 border font-extrabold rounded-md mt-2 w-full" style={{ border: "solid 2px black" }}>SHOW MORE...</button>
                             </div>
-
-
                         </div>
                     ))}
                 </div>
 
-
                 <div className="flex justify-center my-4">
                     <button
                         onClick={() => setCurrentPage(currentPage + 1)}
-                        disabled={indexOfLastItem >= rooms.length}
+                        disabled={indexOfLastItem >= items.length}
                         className="px-4 py-2 bg-transparent rounded-sm ml-2 hover:bg-gray-200"
                     >
                         <IoIosArrowForward size={20} />

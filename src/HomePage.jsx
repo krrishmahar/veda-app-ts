@@ -12,7 +12,7 @@ const HomePage = () => {
         <div className="relative">
           <ImageCarousel />
         </div>
-        <p className='underlined text-2xl m-7 px-5 border-black border-l-2'>
+        <p className='underlined text-2xl m-7 px-5 my-16 border-black border-l-2'>
           <samp className='text-2xl extra-lexa '>Book</samp> A Room Now:
         </p>
         <div className='relative z-20 mt-14'>

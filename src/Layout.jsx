@@ -1,7 +1,7 @@
 import React from 'react';
 import Banner from './components/global/Banner';
 import Footer from './components/global/Footer';
-import Navbar from './components/Home/Navbar';
+import Navbar from './components/global/Navbar';
 
 const Layout = ({ children }) => {
   return (

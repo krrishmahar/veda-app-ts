@@ -2,7 +2,7 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
-import Navbar from './Navbar';
+import Navbar from '../global/Navbar';
 import Typewriter from 'typewriter-effect';
 
 const ImageCarousel = () => {
