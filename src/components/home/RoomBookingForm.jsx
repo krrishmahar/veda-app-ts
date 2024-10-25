@@ -4,12 +4,16 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { motion } from 'framer-motion'; // For animations
 import dayjs from 'dayjs';
-import Counter  from './Counter';
+import Counter from './Counter';
 import { Link } from 'react-router-dom';
 
 const RoomBookingForm = () => {
   const [arrivalDate, setArrivalDate] = useState(dayjs());
   const [departureDate, setDepartureDate] = useState(dayjs());
+  
+  // Guest counts
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
 
   const [showArrivalPicker, setShowArrivalPicker] = useState(false);
   const [showDeparturePicker, setShowDeparturePicker] = useState(false);
@@ -20,14 +24,14 @@ const RoomBookingForm = () => {
   // Animation variants for sliding
   const slideFromLeft = {
     hidden: { x: -200, opacity: 0 },
-    visible: { x: 200, opacity: 1, transition: { duration: 0.5 } },
-    exit: { x: -500, opacity: 0, transition: { duration: 0.5 } }
+    visible: { x: 0, opacity: 1, transition: { duration: 0.5 } },
+    exit: { x: -200, opacity: 0, transition: { duration: 0.5 } }
   };
 
   const slideFromRight = {
-    hidden: { x: 0, opacity: 0 },
-    visible: { x: -393, opacity: 1, transition: { duration: 0.5 } },
-    exit: { x: 500, opacity: 0, transition: { duration: 0.5 } }
+    hidden: { x: 200, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.5 } },
+    exit: { x: 200, opacity: 0, transition: { duration: 0.5 } }
   };
 
   // Close the date picker when clicking outside
@@ -51,14 +55,14 @@ const RoomBookingForm = () => {
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto -mt-12 relative z-20">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className="border border-x-0 border-y-0 border-b-2 border-black m-8">
-            <div className="grid grid-cols-2  ">
-              <label className="mx-5 text-base font-medium flex">Arrival</label>
-              <label className="mx-10 text-base font-medium flex">Departure</label>
+            <div className="grid grid-cols-2">
+              <label className="text-base font-medium flex">Arrival</label>
+              <label className="text-base ml-2 font-medium flex">Departure</label>
             </div>
 
-            <div className="grid grid-cols-2 gap-20 px-5 items-center justify-around mb-4">
+            <div className="grid grid-cols-2 gap-4 items-center justify-around mb-4">
               {/* Arrival Date Picker */}
-              <div ref={arrivalRef}>
+              <div ref={arrivalRef} className="relative">
                 <input
                   type="text"
                   className="mt-1 p-2 border bg-[#F4F4F4] border-black rounded-md w-40 text-center"
@@ -75,7 +79,7 @@ const RoomBookingForm = () => {
                     animate="visible"
                     exit="exit"
                     variants={slideFromLeft}
-                    className="absolute top-24 bg-neutral-300 p-4 rounded-lg shadow-lg z-30"
+                    className="absolute top-12 left-0 bg-neutral-300 p-4 rounded-lg shadow-lg z-30"
                   >
                     <StaticDatePicker
                       orientation="landscape"
@@ -89,7 +93,7 @@ const RoomBookingForm = () => {
               </div>
 
               {/* Departure Date Picker */}
-              <div ref={departureRef}>
+              <div ref={departureRef} className="relative">
                 <input
                   type="text"
                   className="mt-1 p-2 border bg-[#F4F4F4] border-black rounded-md w-40 text-center"
@@ -106,7 +110,7 @@ const RoomBookingForm = () => {
                     animate="visible"
                     exit="exit"
                     variants={slideFromRight}
-                    className="absolute top-24 bg-gray-300 p-4 rounded-lg shadow-lg z-30"
+                    className="absolute top-12 right-0 bg-gray-300 p-4 rounded-lg shadow-lg z-30"
                   >
                     <StaticDatePicker
                       orientation="landscape"
@@ -121,18 +125,19 @@ const RoomBookingForm = () => {
             </div>
           </div>
 
+          {/* Guest Count Section */}
           <div className="border border-x-0 border-y-0 border-b-2 border-black m-8">
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <Counter label={"Adult"}/>
-              <div className="flex items-center justify-center">
-              <Counter label={"Children"}/>
-              </div>
+              {/* Adults Counter */}
+              <Counter label="Adults" guests={adults} setGuests={setAdults} />
+              {/* Children Counter */}
+              <Counter label="Children" guests={children} setGuests={setChildren} />
             </div>
           </div>
 
           <div className="flex justify-center">
-            <Link to="/roompage" > 
-            <button className="px-52 py-3 bg-black text-white rounded-lg " >Next</button>
+            <Link to="/roompage">
+              <button className="px-52 py-3 bg-black text-white rounded-lg">Next</button>
             </Link>
           </div>
         </LocalizationProvider>

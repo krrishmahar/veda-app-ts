@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider, useRoutes } from 'react-router-dom
 import ErrorPage from './components/errors/errorpage.jsx'
 import AdminPage from './AdminPage.jsx'
 import RoomPage from './RoomPage.jsx'
+import ContactPage from './ContactPage.jsx'
+import BookPage from './BookPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -26,7 +28,15 @@ const router = createBrowserRouter([
   {
     path: '/roompage',
     element: <RoomPage />
-  }
+  },
+  {
+    path: '/contact',
+    element: <ContactPage />
+  },
+  {
+    path: '/booknow',
+    element: <BookPage />
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
