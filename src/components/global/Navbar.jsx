@@ -56,7 +56,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <style jsx>{`
+      <style tsx>{`
         .active {
           position: relative;
         }

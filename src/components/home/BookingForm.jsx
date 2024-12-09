@@ -59,7 +59,7 @@ const BookingForm = () => {
                     </div>
 
                     {/* Member of Andhra Mahasabha */}
-                    <div className="mb-4 flex justify-center border-t-2 border-black mt-4 pt-2">
+                    <div className="mb-4 flex justify-center border-t-2 border-[#d9d9d9] mt-4 pt-2">
                         <label className="font-bold mb-1 mr-4">Member of Andhra Mahasabha <samp className='text-[#FF0000]'>*</samp></label>
                         <div className="flex space-x-4">
                             <label className="flex items-center">
@@ -88,7 +88,7 @@ const BookingForm = () => {
 
                     {/* Conditional Fields: Member ID and OTP */}
                     {isMember && (
-                        <div className="grid grid-rows-2 gap-4 border-b-2 items-center pb-4 border-black mb-4">
+                        <div className="grid grid-rows-2 gap-4 border-b-2 items-center pb-4 border-[#d9d9d9] mb-4">
                             <div className="flex justify-center items-center gap-4">
                                 <label className="font-bold mb-1">Member ID</label>
                                 <input {...register('memberId')} type="text" className="m-1 px-2 w-60 bg-[#F4F4F4] text-[#818181] border rounded p-2" placeholder="Member ID( A132425 )" />
@@ -106,7 +106,7 @@ const BookingForm = () => {
                     <div className="grid grid-cols-4 gap-4 mb-4">
                         <div>
                             <label className="block font-bold mb-1">Room Type</label>
-                            <select {...register('roomType')} className="w-full border border-black rounded p-2">
+                            <select {...register('roomType')} className="w-full border bg-[#F4F4F4] border-black rounded p-2">
                                 <option value="single">Single Room</option>
                                 <option value="double">Double Room</option>
                                 <option value="suite">Suite</option>
@@ -127,7 +127,7 @@ const BookingForm = () => {
                     </div>
 
                     {/* Special Requests */}
-                    <div className="mb-4 border-b-2 p-5 pb-8 border-black">
+                    <div className="mb-4 border-b-2 p-5 pb-8 border-[#d9d9d9]">
                         <label className="block font-bold mb-1">Special Requests</label>
                         <textarea {...register('specialRequests')} className="w-full border bg-[#F4F4F4] text-[#818181] rounded-md px-2 py-2 pr-[14.5rem] pb-20 p-2" placeholder="Additional Information"></textarea>
                     </div>
